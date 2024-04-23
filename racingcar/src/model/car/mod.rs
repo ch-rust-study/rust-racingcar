@@ -12,7 +12,7 @@ impl Car {
     }
   }
 
-  pub fn get_name(self) -> String {
-    self.name
+  pub fn get_name(&self) -> String {
+    self.name.clone()
   }
 }
