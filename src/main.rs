@@ -1,4 +1,7 @@
-use rand::Rng;
+mod car;
+mod racing_game;
+
+use racing_game::RacingGame;
 use std::io::{self};
 
 fn input_string(prompt: &str) -> String {
@@ -23,77 +26,6 @@ fn input_number(prompt: &str) -> i32 {
     match input.trim().parse::<i32>() {
         Ok(number) => number,
         Err(_) => panic!("[ERROR] 숫자를 입력하세요"),
-    }
-}
-
-fn is_run() -> bool {
-    return rand::thread_rng().gen_range(0..=9) >= 4;
-}
-
-#[derive(Clone)]
-struct Car {
-    name: String,
-    position: i32,
-}
-
-impl Car {
-    fn new(name: &str) -> Car {
-        Car {
-            name: String::from(name),
-            position: 0,
-        }
-    }
-
-    fn run(&mut self) {
-        if is_run() {
-            self.position += 1;
-        }
-    }
-
-    fn log(&self) {
-        println!(
-            "{} : {}",
-            self.name,
-            "-".repeat(self.position.try_into().unwrap())
-        );
-    }
-}
-
-struct RacingGame {
-    cars: Vec<Car>,
-}
-
-impl RacingGame {
-    fn new() -> RacingGame {
-        RacingGame { cars: Vec::new() }
-    }
-
-    fn make_cars(&mut self, cars_input: &str) {
-        self.cars = cars_input
-            .split(',')
-            .map(|name| Car::new(name.trim()))
-            .collect()
-    }
-
-    fn start(&mut self, count: i32) {
-        println!("실행 결과\n");
-        for _i in 1..=count {
-            for car in &mut self.cars {
-                car.run();
-                car.log();
-            }
-            println!("");
-        }
-    }
-
-    fn get_winner_cars(&self) -> Vec<Car> {
-        let max_position = self.cars.iter().map(|car| car.position).max();
-
-        self.cars
-            .iter()
-            .filter(|car| car.position == max_position.unwrap())
-            .cloned()
-            .collect()
     }
 }
 
