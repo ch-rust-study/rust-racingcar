@@ -1,3 +1,5 @@
+use rand::{thread_rng, Rng};
+
 use super::car::Car;
 
 pub struct RacingGame {
@@ -26,7 +28,19 @@ impl RacingGame {
     self.rounds_count = count
   }
 
-  pub fn get_car_names(self) -> Vec<String> {
+  pub fn get_car_names(&self) -> Vec<String> {
     self.cars.iter().map(|car| car.get_name()).collect()
+  }
+
+  pub fn play_once(&mut self) {
+    for car in self.cars.iter_mut() {
+      let mut rng = thread_rng();
+      let random_number = rng.gen_range(0..=9);
+      let can_go = random_number >= 4;
+
+      if can_go {
+        car.go_forward();
+      }
+    }
   }
 }

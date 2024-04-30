@@ -15,4 +15,12 @@ impl Car {
   pub fn get_name(&self) -> String {
     self.name.clone()
   }
+
+  pub fn get_progress(&self) -> i32 {
+    self.progress
+  }
+
+  pub fn go_forward(&mut self) {
+    self.progress += 1
+  }
 }
