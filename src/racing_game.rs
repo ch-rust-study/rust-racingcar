@@ -43,3 +43,45 @@ impl RacingGame {
             .collect()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn game_make_cars() {
+        let mut game = RacingGame::new();
+        game.make_cars("foo, bar, baz");
+        assert_eq!(game.cars.len(), 3);
+
+        assert_eq!(game.cars[0].name, "foo");
+        assert_eq!(game.cars[1].name, "bar");
+        assert_eq!(game.cars[2].name, "baz");
+    }
+
+    #[test]
+    fn get_winner_cars_test() {
+        let car1 = Car {
+            name: String::from("foo"),
+            position: 3,
+        };
+
+        let car2 = Car {
+            name: String::from("bar"),
+            position: 3,
+        };
+
+        let car3 = Car {
+            name: String::from("baz"),
+            position: 2,
+        };
+
+        let mut game = RacingGame::new();
+        game.cars = vec![car1, car2, car3];
+        let winners = game.get_winner_cars();
+
+        assert_eq!(winners.len(), 2);
+        assert_eq!(winners[0].name, "foo");
+        assert_eq!(winners[1].name, "bar");
+    }
+}

@@ -23,3 +23,16 @@ impl Car {
         );
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn car_run() {
+        let mut foo = Car::new("foo");
+        let old_position = foo.position;
+        foo.run();
+        assert_eq!(old_position + 1, foo.position);
+    }
+}
