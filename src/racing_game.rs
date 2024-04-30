@@ -1,7 +1,12 @@
 use crate::car::Car;
+use rand::Rng;
 
 pub struct RacingGame {
     cars: Vec<Car>,
+}
+
+fn is_run() -> bool {
+    return rand::thread_rng().gen_range(0..=9) >= 4;
 }
 
 impl RacingGame {
@@ -20,7 +25,9 @@ impl RacingGame {
         println!("실행 결과\n");
         for _i in 1..=count {
             for car in &mut self.cars {
-                car.run();
+                if is_run() {
+                    car.run();
+                }
                 car.log();
             }
             println!("");
