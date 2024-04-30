@@ -1,6 +1,6 @@
 pub struct Car {
   name: String,
-  progress: i32,
+  progress:u32,
 }
 
 impl Car {
@@ -16,7 +16,7 @@ impl Car {
     self.name.clone()
   }
 
-  pub fn get_progress(&self) -> i32 {
+  pub fn get_progress(&self) -> u32 {
     self.progress
   }
 

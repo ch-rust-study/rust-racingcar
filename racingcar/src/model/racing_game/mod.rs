@@ -43,4 +43,17 @@ impl RacingGame {
       }
     }
   }
+
+  pub fn play(&mut self, show_progress: fn(Vec<&Car>) -> ()) {
+    for _ in 0..self.rounds_count {
+      self.play_once();
+      let mut car_refs: Vec<&Car> = Vec::new();
+      for car in self.cars.iter() {
+        car_refs.push(car)
+      }
+      show_progress(car_refs);
+    }
+  }
+
+  
 }
