@@ -22,7 +22,11 @@ impl RacingController {
 
   fn set_rounds_count(&mut self) {
     let rounds_count = racing_input::requestRoundsCount();
-    self.racing_game.set_rounds_count(rounds_count);
+    let set_rounds_count_result = self.racing_game.set_rounds_count(rounds_count);
+    if let Err(e) = set_rounds_count_result {
+      racing_output::show_error_message(e.message);
+      self.set_rounds_count()
+    }
   }
 
   fn show_racing_result(&mut self) {
