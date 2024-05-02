@@ -28,10 +28,6 @@ impl RacingGame {
     self.rounds_count = count
   }
 
-  pub fn get_car_names(&self) -> Vec<String> {
-    self.cars.iter().map(|car| car.get_name()).collect()
-  }
-
   pub fn play_once(&mut self) {
     for car in self.cars.iter_mut() {
       let mut rng = thread_rng();
