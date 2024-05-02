@@ -12,7 +12,7 @@ pub fn show_racing_progress(cars: Vec<&Car>) {
   print!("\n----------\n")
 }
 
-pub fn show_racing_result(result: Vec<&Car>) {
+pub fn show_racing_winners(result: Vec<&Car>) {
   print!("최종 우승자 : {}",
   result
     .iter()
