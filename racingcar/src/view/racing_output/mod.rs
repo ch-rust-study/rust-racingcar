@@ -1,4 +1,4 @@
-use crate::model::{car::Car, racing_game::ValidationError};
+use crate::model::car::Car;
 
 pub fn show_racing_result_title() {
   print!("\n실행결과\n\n");
