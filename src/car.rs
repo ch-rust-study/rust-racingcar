@@ -1,5 +1,3 @@
-use rand::Rng;
-
 pub struct Car {
     pub name: String,
     pub position: i32,
@@ -14,9 +12,7 @@ impl Car {
     }
 
     pub fn run(&mut self) {
-        if is_run() {
-            self.position += 1;
-        }
+        self.position += 1;
     }
 
     pub fn log(&self) {
@@ -28,6 +24,15 @@ impl Car {
     }
 }
 
-fn is_run() -> bool {
-    return rand::thread_rng().gen_range(0..=9) >= 4;
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn car_run() {
+        let mut foo = Car::new("foo");
+        let old_position = foo.position;
+        foo.run();
+        assert_eq!(old_position + 1, foo.position);
+    }
 }
