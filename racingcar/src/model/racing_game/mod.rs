@@ -55,5 +55,15 @@ impl RacingGame {
     }
   }
 
-  
+  pub fn get_result(&self) -> Vec<&Car> {
+    let max_progress = self.cars.iter().map(|car| car.get_progress()).max();
+
+    match max_progress {
+      Some(max) => {
+        let result: Vec<&Car> = self.cars.iter().filter(|car| car.get_progress() == max).collect();
+        result
+      },
+      None => Vec::new()
+    }
+  }  
 }
