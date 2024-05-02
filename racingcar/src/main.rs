@@ -4,7 +4,7 @@ mod model;
 use view::input;
 use model::racing_game::RacingGame;
 
-use crate::view::racing_output::show_racing_progress;
+use crate::view::racing_output::{show_racing_progress, show_racing_result};
 
 
 fn main() {
@@ -29,12 +29,5 @@ fn main() {
     
     racing_game.play(show_racing_progress);
     let result = racing_game.get_result();
-    print!(
-        "{}", 
-        result
-            .iter()
-            .map(|car| car.get_name())
-            .collect::<Vec<String>>()
-            .join(",")
-    )
+    show_racing_result(result);
 }
