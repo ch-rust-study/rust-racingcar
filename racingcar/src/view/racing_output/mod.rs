@@ -1,4 +1,4 @@
-use crate::model::car::Car;
+use crate::model::{car::Car, racing_game::ValidationError};
 
 pub fn show_racing_result_title() {
   print!("\n실행결과\n\n");
@@ -20,4 +20,8 @@ pub fn show_racing_winners(result: Vec<&Car>) {
     .collect::<Vec<String>>()
     .join(",")
   ) 
+}
+
+pub fn show_error_message(error_message: String) {
+  print!("[Error]: {}", error_message)
 }
