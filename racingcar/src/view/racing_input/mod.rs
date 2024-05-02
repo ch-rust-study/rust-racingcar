@@ -9,7 +9,6 @@ pub fn request_rounds_count() -> i32 {
 
   match rounds_count.trim().parse() {
       Ok(count) => return count,
-      // TODO: handle error
       Err(e) => {
         print!("{}", e.to_string());
         return request_rounds_count()
