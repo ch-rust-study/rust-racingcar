@@ -12,7 +12,7 @@ impl RacingController {
   }
 
   fn set_car_names(&mut self) {
-    let names = racing_input::requestCarNames();
+    let names = racing_input::request_car_names();
     let create_car_result = self.racing_game.create_cars(names.trim());
     if let Err(e) = create_car_result {
       racing_output::show_error_message(e.message);
@@ -21,7 +21,7 @@ impl RacingController {
   }
 
   fn set_rounds_count(&mut self) {
-    let rounds_count = racing_input::requestRoundsCount();
+    let rounds_count = racing_input::request_rounds_count();
     let set_rounds_count_result = self.racing_game.set_rounds_count(rounds_count);
     if let Err(e) = set_rounds_count_result {
       racing_output::show_error_message(e.message);
