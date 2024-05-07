@@ -2,6 +2,10 @@ use rand::{thread_rng, Rng};
 
 use super::car::Car;
 
+pub struct ValidationError {
+  pub message: String,
+}
+
 pub struct RacingGame {
   cars: Vec<Car>,
   rounds_count: i32,
@@ -15,21 +19,31 @@ impl RacingGame {
     }
   }
 
-  pub fn create_cars(&mut self, car_names_input: &str) {
-    // TODO: validation 
+
+  pub fn create_cars(&mut self, car_names_input: &str) -> Result<(), ValidationError> {
     let car_names: Vec<&str> = car_names_input.split(',').collect();
     for name in car_names {
-      // TODO: validation
+      // TODO: 매직 넘버 처리하기
+      if name.len() < 1 || name.len() > 5 {
+        return Err(ValidationError {
+          message: "차의 이름은 한 글자 이상 다섯 글자 이하가 되어야 합니다.".to_string(),
+        })
+      }
+
       self.cars.push(Car::new(name.to_string()))
     }
+
+    Ok(())
   }
 
-  pub fn set_rounds_count(&mut self, count: i32) {
-    self.rounds_count = count
-  }
-
-  pub fn get_car_names(&self) -> Vec<String> {
-    self.cars.iter().map(|car| car.get_name()).collect()
+  pub fn set_rounds_count(&mut self, count: i32) -> Result<(), ValidationError> {
+    if count < 1 {
+      return Err(ValidationError {
+        message: "1회 이상 게임을 진행해야 합니다.".to_string(),
+      })
+    }
+    self.rounds_count = count;
+    Ok(())
   }
 
   pub fn play_once(&mut self) {
